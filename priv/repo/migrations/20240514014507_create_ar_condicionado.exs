@@ -9,6 +9,7 @@ defmodule CrawlerAr.Repo.Migrations.CreateArCondicionado do
       add :btus, :string
       add :preco, :string
       add :url, :string
+      add :site_id, :integer
       add :created_at, :naive_datetime
       add :updated_at, :naive_datetime
     end

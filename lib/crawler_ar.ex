@@ -31,11 +31,15 @@
 # end
 
 defmodule CrawlerAr do
+  alias CrawlerAr.Produtos.Create
+
   def leveros do
     Client.produtos()
     |> Map.get("conteudo", [])
     |> Map.get("produtos", [])
     |> Enum.map(&clean_product/1)
+    |> IO.inspect()
+    |> Create.call()
   end
 
   defp clean_product(product) do
