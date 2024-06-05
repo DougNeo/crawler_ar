@@ -20,14 +20,7 @@ defmodule CrawlerAr.Produto do
 
   def changeset(produtos, attrs) do
     produtos
-    |> rename_key("id", "site_id")
     |> cast(attrs, @fields)
     |> validate_required(@fields)
-  end
-
-  defp rename_key(map, old_key, new_key) do
-    map
-    |> Map.put_new(new_key, Map.get(map, old_key))
-    |> Map.delete(old_key)
   end
 end

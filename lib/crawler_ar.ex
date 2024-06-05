@@ -38,13 +38,14 @@ defmodule CrawlerAr do
     |> Map.get("conteudo", [])
     |> Map.get("produtos", [])
     |> Enum.map(&clean_product/1)
-    |> IO.inspect()
+    |> Enum.map(fn produto -> IO.inspect(produto) end)
     |> Create.call()
   end
 
   defp clean_product(product) do
     product
     |> Map.take(["id", "nome", "estoque", "status", "url", "marca", "precos"])
+    |> rename_key("id", "site_id")
     |> Map.update!("marca", fn marca -> fetch_marca_name(marca) end)
     |> Map.update!("precos", fn precos -> clean_precos(precos) end)
     |> add_preco_fields()
@@ -67,5 +68,11 @@ defmodule CrawlerAr do
     Map.put_new(map, "preco_de", preco_de)
     |> Map.put_new("preco_por", preco_por)
     |> Map.put_new("preco_vista", preco_vista)
+  end
+
+  defp rename_key(map, old_key, new_key) do
+    map
+    |> Map.put_new(new_key, Map.get(map, old_key))
+    |> Map.delete(old_key)
   end
 end

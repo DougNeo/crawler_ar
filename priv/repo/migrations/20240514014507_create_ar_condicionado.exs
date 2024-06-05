@@ -2,16 +2,18 @@ defmodule CrawlerAr.Repo.Migrations.CreateArCondicionado do
   use Ecto.Migration
 
   def change do
-    create table(:ar_condicionado) do
+    create table(:produto) do
+      add :estoque, :integer
       add :marca, :string
-      add :modelo, :string
-      add :tipo, :string
-      add :btus, :string
-      add :preco, :string
-      add :url, :string
+      add :nome, :string
+      add :preco_de, :float
+      add :preco_por, :float
+      add :preco_vista, :float
       add :site_id, :integer
-      add :created_at, :naive_datetime
-      add :updated_at, :naive_datetime
+      add :status, :string
+      add :url, :string
+
+      timestamps()
     end
 
   end
